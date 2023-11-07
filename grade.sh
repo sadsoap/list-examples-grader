@@ -12,5 +12,47 @@ echo 'Finished cloning'
 # Draw a picture/take notes on the directory structure that's set up after
 # getting to this point
 
+# The above code removes the previous testing repository/grade, if any, and then 
+# makes a directory called "grading-area" and clones the given 
+# repository and stores it in another directory called "student-submission"
+
 # Then, add here code to compile and run, and do any post-processing of the
 # tests
+
+echo "--------- My Work ----------"
+
+
+student_submission="student-submission/ListExamples.java"
+grading_area="grading-area"
+#test_list_examples="TestListExamples"
+
+#Step 1 -- check student code
+if [[ -f $student_submission ]]
+then 
+    echo "file found"
+
+    #copy over to grading-area
+    cp "$student_submission" "$grading_area"
+
+    #compile java files
+
+    # should include different exit codes and the reasoning for user?
+    javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" *.java
+
+    if [[ $? -eq 0 ]]
+    then
+        echo "No compilation issues. Exited with code 0"
+    else
+        echo "There was a compilation issue."
+
+    #run test
+    #java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples
+
+    fi
+
+else 
+    echo "file does not exist"
+
+fi
+
+
