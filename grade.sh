@@ -19,20 +19,18 @@ echo 'Finished cloning'
 # Then, add here code to compile and run, and do any post-processing of the
 # tests
 
-echo "--------- My Work ----------"
-
 
 student_submission="student-submission/ListExamples.java"
 grading_area="grading-area"
-#test_list_examples="TestListExamples"
+test_list_examples="TestListExamples.java"
 
 #Step 1 -- check student code
 if [[ -f $student_submission ]]
 then 
-    echo "file found"
 
     #copy over to grading-area
     cp "$student_submission" "$grading_area"
+    cp "$test_list_examples" "$grading_area"
 
     #compile java files
 
@@ -41,17 +39,16 @@ then
 
     if [[ $? -eq 0 ]]
     then
-        echo "No compilation issues. Exited with code 0"
+        echo "No compilation issues. Exited with code "$?
     else
-        echo "There was a compilation issue."
-
-    #run test
-    #java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples
-
+        echo "There was a compilation issue. Exited with code "$?
     fi
 
+    #run test
+    java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples
+
 else 
-    echo "file does not exist"
+    echo "ListExamples.java file does not exist."
 
 fi
 
