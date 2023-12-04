@@ -30,7 +30,7 @@ then
 
     #copy over to grading-area
     cp "$student_submission" "$grading_area"
-    cp "$test_list_examples" "$grading_area"
+    cp "$test_list_exa" "$grading_area"
 
     #compile java files
 
